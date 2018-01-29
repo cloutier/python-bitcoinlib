@@ -59,8 +59,8 @@ class LitecoinParams(bitcoin.core.CoreRegTestParams):
     RPC_PORT = 9432
     DNS_SEEDS = ()
     BASE58_PREFIXES = {'PUBKEY_ADDR':48,
-                       'SCRIPT_ADDR':196,
-                       'SECRET_KEY' :239}
+                       'SCRIPT_ADDR':52,
+                       'SECRET_KEY' :176}
 
 class LitecoinTestnetParams(bitcoin.core.CoreRegTestParams):
     MESSAGE_START = b'\xfa\xbf\xb5\xda'
