@@ -16,7 +16,7 @@ import bitcoin.core
 # Note that setup.py can break if __init__.py imports any external
 # dependencies, as these might not be installed when setup.py runs. In this
 # case __version__ could be moved to a separate version.py and imported here.
-__version__ = '0.9.1dev'
+__version__ = '0.9.2dev'
 
 class MainParams(bitcoin.core.CoreMainParams):
     MESSAGE_START = b'\xf9\xbe\xb4\xd9'
@@ -53,6 +53,24 @@ class RegTestParams(bitcoin.core.CoreRegTestParams):
                        'SCRIPT_ADDR':196,
                        'SECRET_KEY' :239}
 
+class LitecoinParams(bitcoin.core.CoreRegTestParams):
+    MESSAGE_START = b'\xfa\xbf\xb5\xda'
+    DEFAULT_PORT = 9333
+    RPC_PORT = 9432
+    DNS_SEEDS = ()
+    BASE58_PREFIXES = {'PUBKEY_ADDR':48,
+                       'SCRIPT_ADDR':196,
+                       'SECRET_KEY' :239}
+
+class LitecoinTestnetParams(bitcoin.core.CoreRegTestParams):
+    MESSAGE_START = b'\xfa\xbf\xb5\xda'
+    DEFAULT_PORT = 19335
+    RPC_PORT = 19332
+    DNS_SEEDS = ()
+    BASE58_PREFIXES = {'PUBKEY_ADDR':111,
+                       'SCRIPT_ADDR':196,
+                       'SECRET_KEY' :239}
+
 """Master global setting for what chain params we're using.
 
 However, don't set this directly, use SelectParams() instead so as to set the
@@ -76,5 +94,9 @@ def SelectParams(name):
         params = bitcoin.core.coreparams = TestNetParams()
     elif name == 'regtest':
         params = bitcoin.core.coreparams = RegTestParams()
+    elif name == 'litecoin':
+        params = bitcoin.core.coreparams = LitecoinParams()
+    elif name == 'litecoinTestnet':
+        params = bitcoin.core.coreparams = LitecoinTestnetParams()
     else:
         raise ValueError('Unknown chain %r' % name)
